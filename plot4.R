@@ -14,7 +14,7 @@ names(data) = c("Date", "Time", "Global_active_power",
 data$Datetime = strptime(paste(data$Date, data$Time), "%d/%m/%Y %H:%M:%S")
 
 # plot
-Sys.setlocale("LC_TIME", "C")
+Sys.setlocale("LC_TIME", "C")   # for weekday x label (=datetime)
 
 par(mfrow = c(2, 2))
 
@@ -36,8 +36,9 @@ with(data, {
            col=c("black", "red", "blue"), 
            legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
-    plot(Datetime, Global_reactive_power, type="l",
+    plot(Datetime, Global_reactive_power, type="l", 
          xlab="datetime")
+    axis(side=2, yaxp = seq(0.0, 0.5, by=0.5))
 })
 
 # copy plot to image
